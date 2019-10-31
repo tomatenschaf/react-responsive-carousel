@@ -139,6 +139,13 @@ class Carousel extends Component {
             // We stopped swiping, ensure we are heading to the new/current slide and not stuck
             this.resetPosition();
         }
+        const propsCount = Children.count(this.props.children);
+        const prevPropsCount = Children.count(prevProps.children);
+        if (propsCount > prevPropsCount) {
+            // in this case moveTo in componentWillReceiveProps didn't work correct
+            this.moveTo(this.props.selectedItem, null, 'receive-props');
+
+        }
     }
 
     componentWillUnmount() {
